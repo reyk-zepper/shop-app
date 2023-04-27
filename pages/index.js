@@ -1,7 +1,11 @@
+import Slider from "@/components/Slider";
+import ProductList from "@/components/ProductList";
+
 export default function Home() {
   return (
     <>
-      <h1>shop app</h1>
+      <Slider />
+      <ProductList />
     </>
   );
 }
