@@ -8,8 +8,8 @@ export default function Slider() {
         <Carousel.Item>
           <Image
             className="d-block w-50 h-50 rounded-3"
-            src="/images/products/candyGrabber.jpg"
-            alt="Candy Grabber"
+            src="/images/carousel/future-productsglasses.jpg"
+            alt="Fidget"
             width={3000}
             height={1000}
           />
@@ -17,13 +17,13 @@ export default function Slider() {
         <Carousel.Item>
           <Image
             className="d-block w-50 h-50 rounded-3"
-            src="/images/products/hoptimistChrome.jpg"
-            alt="chrome Hoptimist"
+            src="/images/carousel/future-products.jpg"
+            alt="robots"
             width={3000}
             height={1000}
           />
         </Carousel.Item>
-        <Carousel.Item>
+        {/* <Carousel.Item>
           <Image
             className="d-block w-50 h-50 rounded-3"
             src="/images/products/robo.jpg"
@@ -31,7 +31,7 @@ export default function Slider() {
             width={3000}
             height={1000}
           />
-        </Carousel.Item>
+        </Carousel.Item> */}
       </Carousel>
     </div>
   );
