@@ -40,7 +40,7 @@ export default function ShoppingCart() {
             </tbody>
           </Table>
         </div>
-        <div className="col-3 p2">
+        <div className="col-3 p-2">
           <div className="shadow">
             <Card>
               <Card.Header as="h5">Order Summary</Card.Header>
