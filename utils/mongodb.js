@@ -11,7 +11,7 @@ if (!cached) {
 
 async function dbConnect() {
   if (cached.conn) {
-    console.log("DB ACTIVE");
+    // console.log("DB ACTIVE");
     return cached.conn;
   }
 
@@ -25,7 +25,7 @@ async function dbConnect() {
     cached.promise = mongoose
       .connect(process.env.MONGODB_URI, options)
       .then((mongoose) => {
-        console.log("DB CONNECTED");
+        // console.log("DB CONNECTED");
         return mongoose;
       });
   }
@@ -35,7 +35,7 @@ async function dbConnect() {
 
 async function dbDisconnect() {
   await mongoose.disconnect();
-  console.log("DB DISCONNECTED");
+  // console.log("DB DISCONNECTED");
 }
 
 const mongodb = {

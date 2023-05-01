@@ -1,14 +1,10 @@
-import { useRouter } from "next/router";
-import jsondb from "@/jsondb/products";
 import Link from "next/link";
 import Image from "next/image";
 import { ListGroup, Button } from "react-bootstrap";
+import mongodb from "@/utils/mongodb";
+import Product from "@/models/Product";
 
-export default function ProductPage() {
-  const router = useRouter();
-  const { url } = router.query;
-  const product = jsondb.products.find((product) => product.url === url);
-
+export default function ProductPage({ product }) {
   if (!product) {
     return (
       <div>
@@ -60,4 +56,15 @@ export default function ProductPage() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const url = context.params.url;
+  await mongodb.dbConnect();
+  const product = await Product.findOne({ url }).lean();
+  return {
+    props: {
+      product: JSON.parse(JSON.stringify(product)),
+    },
+  };
 }

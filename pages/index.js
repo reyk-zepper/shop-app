@@ -17,7 +17,7 @@ export async function getServerSideProps() {
   const products = await Product.find({}).lean();
   return {
     props: {
-      products,
+      products: JSON.parse(JSON.stringify(products)),
     },
   };
 }
