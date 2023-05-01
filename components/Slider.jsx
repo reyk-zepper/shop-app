@@ -4,24 +4,28 @@ import Image from "next/image";
 export default function Slider() {
   return (
     <div className="text-center">
-      <Carousel controls={false} fade={true} interval={2500}>
+      <Carousel controls={false} fade={false} interval={2500}>
         <Carousel.Item>
-          <Image
+          {/* <Image
             className="d-block w-50 h-50 rounded-3"
             src="/images/carousel/future-productsglasses.jpg"
             alt="Fidget"
             width={3000}
             height={1000}
-          />
+          /> */}
+          <h1>SALE</h1>
+          <br />
         </Carousel.Item>
         <Carousel.Item>
-          <Image
+          {/* <Image
             className="d-block w-50 h-50 rounded-3"
             src="/images/carousel/future-products.jpg"
             alt="robots"
             width={3000}
             height={1000}
-          />
+          /> */}
+          <h1>ULTIMATE FIDGETS</h1>
+          <br />
         </Carousel.Item>
         {/* <Carousel.Item>
           <Image
