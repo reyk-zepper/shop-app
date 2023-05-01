@@ -13,7 +13,8 @@ export default function Slider() {
             width={3000}
             height={1000}
           /> */}
-          <h1>SALE</h1>
+          <br />
+          <h1 className="display-1">SALE</h1>
           <br />
         </Carousel.Item>
         <Carousel.Item>
@@ -24,7 +25,8 @@ export default function Slider() {
             width={3000}
             height={1000}
           /> */}
-          <h1>ULTIMATE FIDGETS</h1>
+          <br />
+          <h1 className="display-1">ULTIMATE FIDGETS</h1>
           <br />
         </Carousel.Item>
         {/* <Carousel.Item>
