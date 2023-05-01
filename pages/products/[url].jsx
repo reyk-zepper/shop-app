@@ -3,8 +3,11 @@ import Image from "next/image";
 import { ListGroup, Button } from "react-bootstrap";
 import mongodb from "@/utils/mongodb";
 import Product from "@/models/Product";
+import { useState } from "react";
 
 export default function ProductPage({ product }) {
+  const [quantity, setQuantity] = useState(1);
+
   if (!product) {
     return (
       <div>
@@ -34,16 +37,17 @@ export default function ProductPage({ product }) {
 
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2 className="text-danger">{product.price}$</h2>
+              <h2 className="text-danger">{product.price.toFixed(2)}$</h2>
             </ListGroup.Item>
             <ListGroup.Item>{product.description}</ListGroup.Item>
             <ListGroup.Item>
               <input
                 type="number"
                 className="form-control w-50"
-                placeholder="1"
+                value={quantity}
                 min="1"
                 max="10"
+                onChange={(e) => setQuantity(e.target.value)}
               />
             </ListGroup.Item>
             <ListGroup.Item>
