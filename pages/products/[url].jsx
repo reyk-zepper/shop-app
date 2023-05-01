@@ -1,12 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup, Button, ListGroupItem } from "react-bootstrap";
 import mongodb from "@/utils/mongodb";
 import Product from "@/models/Product";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProducts } from "@/redux/shoppingCartSlice";
 
 export default function ProductPage({ product }) {
-  const [quantity, setQuantity] = useState(1);
+  const [amount, setAmount] = useState(1);
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    dispatch(addProducts({ ...product, amount }));
+  };
 
   if (!product) {
     return (
@@ -36,25 +43,27 @@ export default function ProductPage({ product }) {
           <h1>{product.name}</h1>
 
           <ListGroup variant="flush">
-            <ListGroup.Item>
+            <ListGroupItem>
               <h2 className="text-danger">{product.price.toFixed(2)}$</h2>
-            </ListGroup.Item>
-            <ListGroup.Item>{product.description}</ListGroup.Item>
-            <ListGroup.Item>
+            </ListGroupItem>
+            <ListGroupItem>{product.description}</ListGroupItem>
+            <ListGroupItem>
               <input
                 type="number"
                 className="form-control w-50"
-                value={quantity}
+                value={amount}
                 min="1"
                 max="10"
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={(e) => setAmount(e.target.value)}
               />
-            </ListGroup.Item>
-            <ListGroup.Item>
+            </ListGroupItem>
+            <ListGroupItem>
               <div className="row shadow">
-                <Button variant="danger">add to shopping cart</Button>
+                <Button variant="danger" onClick={addToCart}>
+                  add to shopping cart
+                </Button>
               </div>
-            </ListGroup.Item>
+            </ListGroupItem>
           </ListGroup>
         </div>
       </div>
