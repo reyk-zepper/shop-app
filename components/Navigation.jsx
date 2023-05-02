@@ -15,6 +15,7 @@ export default function Navigation() {
             src={"/pictures/logo.png"}
             width={120}
             height={120}
+            priority={true}
           />
         </Link>
 

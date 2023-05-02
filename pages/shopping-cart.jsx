@@ -6,7 +6,6 @@ import Link from "next/link";
 export default function ShoppingCart() {
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
-  console.log(shoppingCart);
 
   return (
     <div>
@@ -59,7 +58,7 @@ export default function ShoppingCart() {
             <Card>
               <Card.Header as="h5">Order Summary</Card.Header>
               <Card.Body className="text-center">
-                <Card.Title>10,00 $</Card.Title>
+                <Card.Title>{shoppingCart.total}</Card.Title>
                 <Button variant="primary">Checkout</Button>
               </Card.Body>
             </Card>
