@@ -6,13 +6,15 @@ import Product from "@/models/Product";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProducts } from "@/redux/shoppingCartSlice";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ProductPage({ product }) {
   const [amount, setAmount] = useState(1);
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addProducts({ ...product, amount }));
+    const _id = uuidv4();
+    dispatch(addProducts({ ...product, amount, _id }));
   };
 
   if (!product) {
