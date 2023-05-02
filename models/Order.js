@@ -13,7 +13,7 @@ const OrderSchema = new mongoose.Schema({
   },
   count: {
     type: Number,
-    required: [true, "Please provide a category for this product."],
+    required: true,
   },
   status: {
     type: Number,

@@ -6,7 +6,7 @@ export default function ProductList({ products }) {
     <div>
       <div className="row row-cols-3">
         {products?.map((product) => (
-          <div className="mt-3 col" key={product.id}>
+          <div className="mt-3 col" key={product._id}>
             <Card>
               <Link href={`/products/${product.url}`} passHref>
                 <Card.Img variant="top" src={product.image} />
@@ -14,9 +14,9 @@ export default function ProductList({ products }) {
               <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>{product.description}</Card.Text>
-                <Card.Text>{product.price}$</Card.Text>
+                <Card.Text>{product.price.toFixed(2)}$</Card.Text>
                 <Link href={`/products/${product.url}`} passHref>
-                  <Button variant="danger">add to shopping cart</Button>
+                  <Button variant="danger">order</Button>
                 </Link>
               </Card.Body>
             </Card>

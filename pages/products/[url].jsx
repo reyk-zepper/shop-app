@@ -1,10 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup, Button, ListGroupItem } from "react-bootstrap";
 import mongodb from "@/utils/mongodb";
 import Product from "@/models/Product";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProducts } from "@/redux/shoppingCartSlice";
+import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/router";
 
 export default function ProductPage({ product }) {
+  const [amount, setAmount] = useState(1);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const addToCart = () => {
+    const _id = uuidv4();
+    dispatch(addProducts({ ...product, amount, _id }));
+    router.push("/shopping-cart");
+  };
+
   if (!product) {
     return (
       <div>
@@ -12,6 +27,7 @@ export default function ProductPage({ product }) {
       </div>
     );
   }
+
   return (
     <div>
       <div>
@@ -25,7 +41,7 @@ export default function ProductPage({ product }) {
             src={product.image}
             width={600}
             height={600}
-            layout="responsive"
+            // layout="responsive"
           />
         </div>
 
@@ -33,24 +49,27 @@ export default function ProductPage({ product }) {
           <h1>{product.name}</h1>
 
           <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2 className="text-danger">{product.price}$</h2>
-            </ListGroup.Item>
-            <ListGroup.Item>{product.description}</ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroupItem>
+              <h2 className="text-danger">{product.price.toFixed(2)}$</h2>
+            </ListGroupItem>
+            <ListGroupItem>{product.description}</ListGroupItem>
+            <ListGroupItem>
               <input
                 type="number"
                 className="form-control w-50"
-                placeholder="1"
+                value={amount}
                 min="1"
                 max="10"
+                onChange={(e) => setAmount(e.target.value)}
               />
-            </ListGroup.Item>
-            <ListGroup.Item>
+            </ListGroupItem>
+            <ListGroupItem>
               <div className="row shadow">
-                <Button variant="danger">add to shopping cart</Button>
+                <Button variant="danger" onClick={addToCart}>
+                  add to shopping cart
+                </Button>
               </div>
-            </ListGroup.Item>
+            </ListGroupItem>
           </ListGroup>
         </div>
       </div>

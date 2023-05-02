@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 export default function Navigation() {
+  const quantity = useSelector((state) => state.shoppingCart.quantity);
+
   return (
     <div className="shadow sticky-top p-2 mb-2 bg-secondary">
       <div className="d-flex justify-content-between align-items-center">
@@ -12,6 +15,7 @@ export default function Navigation() {
             src={"/pictures/logo.png"}
             width={120}
             height={120}
+            priority={true}
           />
         </Link>
 
@@ -23,7 +27,7 @@ export default function Navigation() {
             height={60}
           />
           <Badge pill bg="danger" text="light">
-            2
+            {quantity}
           </Badge>
         </Link>
       </div>
