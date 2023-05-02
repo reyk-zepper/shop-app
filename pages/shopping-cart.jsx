@@ -17,7 +17,7 @@ export default function ShoppingCart() {
       {shoppingCart.quantity === 0 ? (
         <>
           <br />
-          <p>it's empty!...c'mooon, grab some stuff!!!</p>
+          <p>mmmh...looks empty!?</p>
         </>
       ) : (
         <div>
