@@ -22,6 +22,7 @@ export default function ProductPage({ product }) {
       </div>
     );
   }
+
   return (
     <div>
       <div>
@@ -35,7 +36,7 @@ export default function ProductPage({ product }) {
             src={product.image}
             width={600}
             height={600}
-            layout="responsive"
+            // layout="responsive"
           />
         </div>
 

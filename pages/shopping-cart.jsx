@@ -1,7 +1,13 @@
 import { Table, CloseButton, Button, Card } from "react-bootstrap";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function ShoppingCart() {
+  const dispatch = useDispatch();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+  console.log(shoppingCart);
+
   return (
     <div>
       <h1>shopping cart</h1>
@@ -20,23 +26,31 @@ export default function ShoppingCart() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <Image
-                    src="/images/products/3d-puzzle.jpg"
-                    alt="3d puzzle"
-                    width={50}
-                    height={50}
-                  />
-                </td>
-                <td>3d Puzzle</td>
-                <td>1</td>
-                <td>10.00</td>
-                <td>
-                  {" "}
-                  <Button className="btn-small">x</Button>{" "}
-                </td>
-              </tr>
+              {shoppingCart.products.map((product) => (
+                <tr key={product._id}>
+                  <td>
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      width={50}
+                      height={50}
+                    />
+                  </td>
+                  <td>
+                    <Link
+                      href={`/products/${product.url}`}
+                      className="text-danger"
+                    >
+                      {product.name}
+                    </Link>
+                  </td>
+                  <td>{product.amount}</td>
+                  <td>{(product.price * product.amount).toFixed(2)}</td>
+                  <td>
+                    <Button className="btn-small">x</Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>
