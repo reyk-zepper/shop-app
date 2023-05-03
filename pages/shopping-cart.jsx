@@ -2,7 +2,7 @@ import { Table, CloseButton, Button, Card } from "react-bootstrap";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { deleteProduct } from "@/redux/shoppingCartSlice";
+import { deleteProduct, clear } from "@/redux/shoppingCartSlice";
 import { useEffect } from "react";
 import { useState } from "react";
 import {
@@ -10,6 +10,8 @@ import {
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ export default function ShoppingCart() {
   const clientID =
     "AfxmOKcXoHQSB7PV3ViFcK4n989prr3ickmYqfJYJEXgQFSBSZunjXb6dWUYL42cmxH89YjynxLtI0FO";
   const [checkout, setCheckout] = useState(false);
+  const router = useRouter();
 
   const removeProduct = (product) => {
     dispatch(deleteProduct(product));
@@ -27,6 +30,21 @@ export default function ShoppingCart() {
   const style = {
     layout: "vertical",
     height: 30,
+  };
+
+  const createOrder = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/orders",
+        data
+      );
+      if (response.status === 201) {
+        dispatch(clear());
+        router.push(`/orders/${response.data._id}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const ButtonWrapper = ({ currency, showSpinner }) => {
@@ -72,7 +90,17 @@ export default function ShoppingCart() {
           }}
           onApprove={function (data, actions) {
             return actions.order.capture().then(function (details) {
-              console.log(details);
+              const customer = details.purchase_units[0].shipping;
+              createOrder({
+                customer: customer.name.full_name,
+                address:
+                  customer.address.address_line_1 +
+                  ", " +
+                  customer.address.admin_area_1,
+                count: shoppingCart.total,
+                status: 0,
+                payment: 1,
+              });
             });
           }}
         />
