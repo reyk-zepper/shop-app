@@ -23,6 +23,21 @@ const OrderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  products: {
+    type: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+  },
 });
 
+// delete mongoose.connection.models["Order"];
 export default mongoose.models.Order || mongoose.model("Order", OrderSchema);
