@@ -1,12 +1,26 @@
 import { Table, CloseButton, Button, Card, Spinner } from "react-bootstrap";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 
 export default function Order({ order }) {
   const router = useRouter();
   const { id } = router.query;
-  console.log(order);
+
+  let status;
+  switch (order.status) {
+    case 0:
+      status = "received";
+      break;
+    case 1:
+      status = "in progress";
+      break;
+    case 2:
+      status = "out for delivery";
+      break;
+    case 3:
+      status = "delivered";
+      break;
+  }
 
   if (id !== order._id) {
     return (
@@ -41,8 +55,12 @@ export default function Order({ order }) {
                   <td>{order.customer}</td>
                   <td>{order.address}</td>
                   <td>
-                    <span>in Progress</span>
-                    <Spinner animation="border" variant="success" size="sm" />
+                    <span>{status}</span>
+                    {order.status < 3 ? (
+                      <Spinner animation="border" variant="success" size="sm" />
+                    ) : (
+                      <span>✅</span>
+                    )}
                   </td>
                 </tr>
               </tbody>
@@ -54,7 +72,11 @@ export default function Order({ order }) {
                 <Card.Header as="h5">Order Summary</Card.Header>
                 <Card.Body className="text-center">
                   <Card.Title>{order.count.toFixed(2)}$</Card.Title>
-                  <Button variant="success disabled">payed</Button>
+                  {order.payment === 0 ? (
+                    <Button variant="danger disabled">open</Button>
+                  ) : (
+                    <Button variant="success disabled">payed</Button>
+                  )}
                 </Card.Body>
               </Card>
             </div>
