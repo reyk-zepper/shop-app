@@ -96,7 +96,7 @@ export default function ShoppingCart() {
                 address:
                   customer.address.address_line_1 +
                   ", " +
-                  customer.address.admin_area_1,
+                  customer.address.admin_area_2,
                 count: shoppingCart.total,
                 status: 0,
                 payment: 1,
