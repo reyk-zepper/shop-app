@@ -100,6 +100,10 @@ export default function ShoppingCart() {
                 count: shoppingCart.total,
                 status: 0,
                 payment: 1,
+                products: shoppingCart.products.map((product) => ({
+                  name: product.name,
+                  quantity: product.amount,
+                })),
               });
             });
           }}

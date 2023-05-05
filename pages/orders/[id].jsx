@@ -65,6 +65,22 @@ export default function Order({ order }) {
                 </tr>
               </tbody>
             </Table>
+            <Table hover responsive>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.quantity}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </div>
           <div className="col-3 p-2">
             <div className="shadow">
