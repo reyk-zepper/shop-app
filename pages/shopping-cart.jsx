@@ -29,7 +29,7 @@ export default function ShoppingCart() {
   const currency = "USD";
   const style = {
     layout: "vertical",
-    height: 30,
+    // height: 30,
   };
 
   const createOrder = async (data) => {
