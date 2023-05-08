@@ -29,7 +29,12 @@ export default function Navigation() {
                 width={60}
                 height={60}
               />
-              <Badge pill bg="danger" text="light">
+              <Badge
+                pill
+                bg="danger"
+                text="light"
+                style={{ position: "absolute", right: "65px", top: "35px" }}
+              >
                 {quantity}
               </Badge>
             </>
