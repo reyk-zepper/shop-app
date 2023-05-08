@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addProducts } from "@/redux/shoppingCartSlice";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function ProductPage({ product }) {
   const [amount, setAmount] = useState(1);
@@ -29,7 +30,11 @@ export default function ProductPage({ product }) {
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ y: -300 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 120 }}
+    >
       <div>
         <Link href="/">back</Link>
       </div>
@@ -73,7 +78,7 @@ export default function ProductPage({ product }) {
           </ListGroup>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
