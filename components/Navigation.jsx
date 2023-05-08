@@ -12,7 +12,7 @@ export default function Navigation() {
         <Link href="/">
           <Image
             alt="logo"
-            src={"/pictures/logo.png"}
+            src={"/images/logo.png"}
             width={120}
             height={120}
             priority={true}
@@ -22,7 +22,7 @@ export default function Navigation() {
         <Link href="/shopping-cart">
           <Image
             alt="shopping-cart"
-            src={"/pictures/warenkorb.png"}
+            src={"/images/shopping-cart.png"}
             width={60}
             height={60}
           />
