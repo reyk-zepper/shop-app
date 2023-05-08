@@ -20,15 +20,32 @@ export default function Navigation() {
         </Link>
 
         <Link href="/shopping-cart">
-          <Image
-            alt="shopping-cart"
-            src={"/images/shopping-cart.png"}
-            width={60}
-            height={60}
-          />
-          <Badge pill bg="danger" text="light">
-            {quantity}
-          </Badge>
+          {quantity > 0 ? (
+            <>
+              {" "}
+              <Image
+                alt="shopping-cart"
+                src={"/images/shopping-cart.png"}
+                width={60}
+                height={60}
+              />
+              <Badge
+                pill
+                bg="danger"
+                text="light"
+                style={{ position: "absolute", right: "65px", top: "35px" }}
+              >
+                {quantity}
+              </Badge>
+            </>
+          ) : (
+            <Image
+              alt="shopping-cart"
+              src={"/images/shopping-cart.png"}
+              width={60}
+              height={60}
+            />
+          )}
         </Link>
       </div>
     </div>

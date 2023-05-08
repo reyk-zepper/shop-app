@@ -12,6 +12,8 @@ import {
 } from "@paypal/react-paypal-js";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
@@ -23,6 +25,10 @@ export default function ShoppingCart() {
 
   const removeProduct = (product) => {
     dispatch(deleteProduct(product));
+    toast.error(product.name + " deleted", {
+      position: "top-center",
+      autoClose: 3000,
+    });
   };
 
   const amount = shoppingCart.total.toFixed(2);
@@ -113,7 +119,11 @@ export default function ShoppingCart() {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ y: -300 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 120 }}
+    >
       {shoppingCart.quantity === 0 ? (
         <>
           <br />
@@ -204,6 +214,6 @@ export default function ShoppingCart() {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
