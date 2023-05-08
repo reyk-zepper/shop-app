@@ -81,7 +81,16 @@ export default function Order({ orders }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const myCookie = context.req?.cookies || "";
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination: "/backend/login",
+        permanent: false,
+      },
+    };
+  }
   const response = await axios.get(`http://localhost:3000/api/orders`);
   console.log(response.data);
   return {
